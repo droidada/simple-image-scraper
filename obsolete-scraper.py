@@ -11,13 +11,10 @@ def scrape(img_name, url):
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    images = soup.select('img')
-
-    for i, j in enumerate(images):
-        if match_substring_recursive(img_name, j):
-            print(i)
-        else:
-            print('image name not found')
+    for item in soup.find_all('img'):
+        #print(item['src'])
+        if img_name == item['alt']:
+            print('found')
 
 
 if __name__ == '__main__':
